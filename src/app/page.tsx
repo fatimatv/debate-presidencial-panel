@@ -403,21 +403,21 @@ function TeamCard({ title, data, color }) {
     <Card className="overflow-hidden">
       <div className="p-6 text-white" style={{ backgroundColor: color }}>
         <div className="flex items-center justify-between gap-4">
-          <h3 className="text-2xl font-black uppercase">{title}</h3>
+          <h3 className="text-xl font-black uppercase md:text-2xl">{title}</h3>
           <Scale className="h-7 w-7 text-white/70" />
         </div>
-        <blockquote className="mt-5 border-l-4 pl-4 text-lg font-semibold text-white/90" style={{ borderColor: YELLOW }}>
+        <blockquote className="mt-5 border-l-4 pl-4 text-base font-semibold leading-7 text-white/90" style={{ borderColor: YELLOW }}>
           “{data.quote}”
         </blockquote>
       </div>
       <div className="space-y-5 p-6">
         <div>
           <div className="text-xs font-black uppercase tracking-widest" style={{ color: GRAY }}>Propuesta principal</div>
-          <p className="mt-1 text-lg font-bold leading-7">{data.main}</p>
+          <p className="mt-1 text-base font-bold leading-7 text-slate-950">{data.main}</p>
         </div>
         <div>
           <div className="text-xs font-black uppercase tracking-widest" style={{ color: GRAY }}>Problema público</div>
-          <p className="mt-1 text-slate-700">{data.problem}</p>
+          <p className="mt-1 text-sm leading-6 text-slate-700">{data.problem}</p>
         </div>
         <div>
           <div className="mb-2 text-xs font-black uppercase tracking-widest" style={{ color: GRAY }}>Instrumentos</div>
@@ -444,7 +444,7 @@ function QuestionCard({ title, questions }) {
   return (
     <Card>
       <div className="p-6">
-        <h3 className="mb-5 text-2xl font-black uppercase" style={{ color: BLUE }}>{title}</h3>
+        <h3 className="mb-5 text-xl font-black uppercase md:text-2xl" style={{ color: BLUE }}>{title}</h3>
         <ol className="space-y-3">
           {questions.map((question, index) => (
             <li key={question} className="flex gap-3 rounded-2xl bg-slate-50 p-3">
@@ -466,7 +466,7 @@ export default function DebatePresidencialInteractivo() {
   const CurrentIcon = current.icon || Vote;
 
   return (
-    <div className="min-h-screen bg-white text-slate-950" style={{ fontFamily: "Montserrat, Poppins, Avenir Next, system-ui, sans-serif" }}>
+    <div className="ialaw-panel min-h-screen bg-white text-slate-950">
       <section className="relative overflow-hidden" style={{ backgroundColor: BLUE }}>
         <div className="absolute inset-0 opacity-20" aria-hidden="true">
           <div className="absolute -right-32 -top-32 h-96 w-96 rounded-full border border-white/40" />
@@ -487,10 +487,10 @@ export default function DebatePresidencialInteractivo() {
           <div className="mt-16 grid gap-10 lg:grid-cols-[1.2fr_.8fr] lg:items-end">
             <div>
               <div className="mb-5 h-2 w-24 rounded-full" style={{ backgroundColor: YELLOW }} />
-              <h1 className="max-w-5xl text-5xl font-black uppercase leading-[0.95] tracking-tight text-white md:text-7xl">
+              <h1 className="max-w-5xl text-4xl font-black uppercase leading-[1.02] tracking-normal text-white sm:text-5xl lg:text-6xl">
                 Mapa interactivo del debate presidencial
               </h1>
-              <p className="mt-6 max-w-3xl text-lg leading-8 text-white/85">
+              <p className="mt-6 max-w-3xl text-base font-semibold leading-8 text-white/85 md:text-lg">
                 Lectura comparativa, jurídico-regulatoria y tecnológica de las propuestas para la Segunda Vuelta 2026 de Fuerza Popular y Juntos por el Perú.
               </p>
             </div>
@@ -498,16 +498,16 @@ export default function DebatePresidencialInteractivo() {
             <div className="rounded-[2rem] border border-white/20 bg-white/10 p-6 text-white shadow-2xl backdrop-blur">
               <div className="grid grid-cols-2 gap-4">
                 <div className="rounded-3xl bg-white p-5" style={{ color: BLUE }}>
-                  <div className="text-4xl font-black">6</div>
+                  <div className="text-3xl font-black md:text-4xl">6</div>
                   <div className="text-xs font-bold uppercase tracking-wider">bloques</div>
                 </div>
                 <div className="rounded-3xl p-5 text-slate-950" style={{ backgroundColor: YELLOW }}>
-                  <div className="text-4xl font-black">2</div>
+                  <div className="text-3xl font-black md:text-4xl">2</div>
                   <div className="text-xs font-bold uppercase tracking-wider">candidaturas</div>
                 </div>
                 <div className="col-span-2 rounded-3xl border border-white/20 p-5">
-                  <div className="text-sm font-semibold uppercase tracking-[0.25em] text-white/70">Hallazgo central</div>
-                  <div className="mt-2 text-2xl font-black uppercase leading-tight">La tecnología fue instrumental, fragmentaria y sin gobernanza digital.</div>
+                  <div className="text-xs font-bold uppercase tracking-[0.18em] text-white/70">Hallazgo central</div>
+                  <div className="mt-2 text-xl font-black uppercase leading-snug md:text-2xl">La tecnología fue instrumental, fragmentaria y sin gobernanza digital.</div>
                 </div>
               </div>
             </div>
@@ -552,8 +552,8 @@ export default function DebatePresidencialInteractivo() {
                   <div className="mb-3 flex items-center gap-2 text-sm font-black uppercase tracking-[0.25em]" style={{ color: BLUE }}>
                     <CurrentIcon className="h-4 w-4" /> Bloque seleccionado
                   </div>
-                  <h2 className="text-4xl font-black uppercase tracking-tight md:text-5xl">{current.title}</h2>
-                  <p className="mt-3 max-w-3xl text-slate-600">{current.objective}</p>
+                  <h2 className="text-3xl font-black uppercase tracking-normal md:text-4xl">{current.title}</h2>
+                  <p className="mt-3 max-w-3xl text-sm font-medium leading-7 text-slate-600 md:text-base">{current.objective}</p>
                 </div>
                 <div className="rounded-2xl px-4 py-3 text-sm font-bold text-slate-950" style={{ backgroundColor: PALE_YELLOW }}>
                   FP: {current.fpName} · JPP: {current.jppName}
@@ -585,8 +585,8 @@ export default function DebatePresidencialInteractivo() {
             <motion.section key="tecnologia" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} className="py-10">
               <div className="mb-8">
                 <div className="mb-3 h-2 w-20 rounded-full" style={{ backgroundColor: YELLOW }} />
-                <h2 className="text-4xl font-black uppercase tracking-tight md:text-5xl">Foco especial en tecnología</h2>
-                <p className="mt-3 max-w-4xl text-slate-600">
+                <h2 className="text-3xl font-black uppercase tracking-normal md:text-4xl">Foco especial en tecnología</h2>
+                <p className="mt-3 max-w-4xl text-sm font-medium leading-7 text-slate-600 md:text-base">
                   El debate mencionó plataformas de pago, telemedicina, internet escolar, apps de inversión, DNI sanitario y digitalización MYPE. Ninguna candidatura presentó una política integral de IA, datos, ciberseguridad o gobierno digital.
                 </p>
               </div>
@@ -605,7 +605,7 @@ export default function DebatePresidencialInteractivo() {
                             Claridad {item.clarity}/5
                           </div>
                         </div>
-                        <h3 className="text-xl font-black uppercase">{item.name}</h3>
+                        <h3 className="text-lg font-black uppercase">{item.name}</h3>
                         <p className="mt-3 text-sm leading-6 text-slate-600"><strong>Riesgo:</strong> {item.risk}</p>
                         <p className="mt-2 text-sm leading-6 text-slate-600"><strong>Impacto:</strong> {item.impact}</p>
                       </div>
@@ -618,7 +618,7 @@ export default function DebatePresidencialInteractivo() {
                 <div className="grid gap-8 lg:grid-cols-[.8fr_1.2fr] lg:items-center">
                   <div>
                     <div className="mb-3 text-sm font-black uppercase tracking-[0.25em] text-white/70">Radar de ausencias</div>
-                    <h3 className="text-3xl font-black uppercase leading-tight">Lo no dicho es políticamente relevante</h3>
+                    <h3 className="text-2xl font-black uppercase leading-snug md:text-3xl">Lo no dicho es políticamente relevante</h3>
                     <p className="mt-4 text-white/80">
                       Digitalizar seguridad, salud, educación o MYPEs sin gobernanza de datos puede producir más eficiencia, pero también más vigilancia, filtraciones o decisiones opacas.
                     </p>
@@ -643,7 +643,7 @@ export default function DebatePresidencialInteractivo() {
                   <div className="mb-3 flex items-center gap-2 text-sm font-black uppercase tracking-[0.25em]" style={{ color: BLUE }}>
                     <BookOpen className="h-4 w-4" /> Cómo se puntuó
                   </div>
-                  <h2 className="text-4xl font-black uppercase tracking-tight md:text-5xl">Metodología de análisis</h2>
+                  <h2 className="text-3xl font-black uppercase tracking-normal md:text-4xl">Metodología de análisis</h2>
                 </div>
                 <p className="text-sm leading-6 text-slate-600">
                   La plataforma usa exclusivamente la transcripción del debate como fuente principal. No incorpora propuestas externas, promesas de campaña no mencionadas ni información de prensa. La puntuación no mide simpatía política: mide calidad técnica observable en el debate.
@@ -669,7 +669,7 @@ export default function DebatePresidencialInteractivo() {
               </section>
 
               <section className="mt-10 space-y-5">
-                <h3 className="text-2xl font-black uppercase" style={{ color: BLUE }}>Regla de evidencia</h3>
+                <h3 className="text-xl font-black uppercase md:text-2xl" style={{ color: BLUE }}>Regla de evidencia</h3>
                 <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
                   {evidenceRules.map((rule) => (
                     <Card key={rule.label}>
@@ -677,7 +677,7 @@ export default function DebatePresidencialInteractivo() {
                         <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-2xl" style={{ backgroundColor: BLUE }}>
                           <CheckCircle2 className="h-5 w-5 text-white" />
                         </div>
-                        <h4 className="text-lg font-black uppercase">{rule.label}</h4>
+                        <h4 className="text-base font-black uppercase">{rule.label}</h4>
                         <p className="mt-3 text-sm leading-6 text-slate-600">{rule.text}</p>
                       </div>
                     </Card>
@@ -686,12 +686,12 @@ export default function DebatePresidencialInteractivo() {
               </section>
 
               <section className="mt-10 space-y-5">
-                <h3 className="text-2xl font-black uppercase" style={{ color: BLUE }}>Escala 1 a 5</h3>
+                <h3 className="text-xl font-black uppercase md:text-2xl" style={{ color: BLUE }}>Escala 1 a 5</h3>
                 <div className="grid gap-4 md:grid-cols-5">
                   {scoring.map((item) => (
                     <Card key={item.score} className="overflow-hidden">
                       <div className="p-5 text-white" style={{ backgroundColor: item.score === 5 ? BLUE : DEEP_BLUE }}>
-                        <div className="text-5xl font-black">{item.score}</div>
+                        <div className="text-4xl font-black md:text-5xl">{item.score}</div>
                         <div className="mt-1 text-sm font-black uppercase tracking-widest" style={{ color: YELLOW }}>{item.label}</div>
                       </div>
                       <div className="p-5 text-sm leading-6 text-slate-600">{item.detail}</div>
@@ -701,12 +701,12 @@ export default function DebatePresidencialInteractivo() {
               </section>
 
               <section className="mt-10 space-y-5">
-                <h3 className="text-2xl font-black uppercase" style={{ color: BLUE }}>Criterios evaluados</h3>
+                <h3 className="text-xl font-black uppercase md:text-2xl" style={{ color: BLUE }}>Criterios evaluados</h3>
                 <div className="grid gap-5 lg:grid-cols-2">
                   {methodologyCriteria.map((criterion) => (
                     <Card key={criterion.name}>
                       <div className="p-6">
-                        <h4 className="text-xl font-black uppercase" style={{ color: BLUE }}>{criterion.name}</h4>
+                        <h4 className="text-lg font-black uppercase" style={{ color: BLUE }}>{criterion.name}</h4>
                         <p className="mt-3 text-sm font-semibold leading-6 text-slate-700">{criterion.question}</p>
                         <div className="mt-5 grid gap-3 sm:grid-cols-2">
                           <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4">
@@ -728,7 +728,7 @@ export default function DebatePresidencialInteractivo() {
                 <div className="grid gap-5 lg:grid-cols-[0.35fr_1fr] lg:items-center">
                   <div>
                     <div className="mb-3 h-2 w-20 rounded-full" style={{ backgroundColor: YELLOW }} />
-                    <h3 className="text-2xl font-black uppercase">Nota final</h3>
+                    <h3 className="text-xl font-black uppercase md:text-2xl">Nota final</h3>
                   </div>
                   <p className="text-sm font-semibold leading-7 text-white/85">
                     La calificación final es un promedio simple de siete criterios. Una candidatura puede puntuar mejor por concreción discursiva aunque otra tenga un diagnóstico más amplio. La escala premia propuestas que permiten ser auditadas: responsable, instrumento, presupuesto, plazo, indicadores y salvaguardas jurídicas.
@@ -746,7 +746,7 @@ export default function DebatePresidencialInteractivo() {
                     <div className="mb-4 flex items-center gap-2 text-sm font-black uppercase tracking-[0.25em]" style={{ color: BLUE }}>
                       <BarChart3 className="h-4 w-4" /> Escala 1 a 5
                     </div>
-                    <h2 className="text-4xl font-black uppercase">Evaluación comparativa</h2>
+                    <h2 className="text-3xl font-black uppercase md:text-4xl">Evaluación comparativa</h2>
                     <div className="mt-6 h-[420px]">
                       <ResponsiveContainer width="100%" height="100%">
                         <RadarChart data={evaluation} outerRadius="75%">
@@ -767,11 +767,11 @@ export default function DebatePresidencialInteractivo() {
                     <div className="text-sm font-black uppercase tracking-[0.25em] text-white/70">Resultado técnico agregado</div>
                     <div className="mt-5 grid grid-cols-2 gap-4">
                       <div className="rounded-3xl bg-white p-5" style={{ color: BLUE }}>
-                        <div className="text-5xl font-black">3.1</div>
+                        <div className="text-4xl font-black md:text-5xl">3.1</div>
                         <div className="font-bold uppercase">FP</div>
                       </div>
                       <div className="rounded-3xl p-5 text-slate-950" style={{ backgroundColor: YELLOW }}>
-                        <div className="text-5xl font-black">2.8</div>
+                        <div className="text-4xl font-black md:text-5xl">2.8</div>
                         <div className="font-bold uppercase">JPP</div>
                       </div>
                     </div>
@@ -804,8 +804,8 @@ export default function DebatePresidencialInteractivo() {
           {view === "palabras" && (
             <motion.section key="palabras" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} className="py-10">
               <div className="mb-8">
-                <h2 className="text-4xl font-black uppercase tracking-tight md:text-5xl">Lenguaje y énfasis discursivo</h2>
-                <p className="mt-3 max-w-4xl text-slate-600">
+                <h2 className="text-3xl font-black uppercase tracking-normal md:text-4xl">Lenguaje y énfasis discursivo</h2>
+                <p className="mt-3 max-w-4xl text-sm font-medium leading-7 text-slate-600 md:text-base">
                   Se agruparon términos equivalentes y se excluyeron palabras vacías. Los resultados son aproximados por ruido de transcripción y bloques informativos del debate.
                 </p>
               </div>
@@ -830,13 +830,13 @@ export default function DebatePresidencialInteractivo() {
               <div className="mt-6 grid gap-4 md:grid-cols-2">
                 <Card>
                   <div className="p-6">
-                    <h3 className="text-xl font-black uppercase" style={{ color: BLUE }}>Fuerza Popular</h3>
+                    <h3 className="text-lg font-black uppercase" style={{ color: BLUE }}>Fuerza Popular</h3>
                     <p className="mt-3 text-slate-600">Predomina el marco “orden versus caos”, con énfasis en empleo, seguridad, educación, salud, inversión y gestión.</p>
                   </div>
                 </Card>
                 <Card>
                   <div className="p-6">
-                    <h3 className="text-xl font-black uppercase" style={{ color: BLUE }}>Juntos por el Perú</h3>
+                    <h3 className="text-lg font-black uppercase" style={{ color: BLUE }}>Juntos por el Perú</h3>
                     <p className="mt-3 text-slate-600">Predomina la lectura de democracia, derechos, justicia, Estado, corrupción, descentralización y recuperación institucional.</p>
                   </div>
                 </Card>
@@ -850,7 +850,7 @@ export default function DebatePresidencialInteractivo() {
                 <div className="mb-3 flex items-center gap-2 text-sm font-black uppercase tracking-[0.25em]" style={{ color: BLUE }}>
                   <FileQuestion className="h-4 w-4" /> Segunda ronda
                 </div>
-                <h2 className="text-4xl font-black uppercase tracking-tight md:text-5xl">Preguntas que faltan</h2>
+                <h2 className="text-3xl font-black uppercase tracking-normal md:text-4xl">Preguntas que faltan</h2>
               </div>
 
               <div className="grid gap-6 lg:grid-cols-2">
