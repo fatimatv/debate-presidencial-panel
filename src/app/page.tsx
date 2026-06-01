@@ -257,11 +257,105 @@ const gaps = [
 ];
 
 const scoring = [
-  { score: 1, label: "Genérico", detail: "Declaración sin propuesta verificable, instrumento ni viabilidad aparente." },
-  { score: 2, label: "Básico", detail: "Identifica problema, pero con instrumentos vagos o sin ruta de implementación." },
-  { score: 3, label: "Reconocible", detail: "Presenta propuesta e instrumento, pero sin costeo, cronograma o entidad responsable suficiente." },
-  { score: 4, label: "Sólido", detail: "Propuesta clara, con instrumentos concretos, viabilidad preliminar y menor nivel de vacío." },
-  { score: 5, label: "Completo", detail: "Propuesta costeada, con responsable, secuencia normativa, cronograma, indicadores y mitigación de riesgos." }
+  {
+    score: 1,
+    label: "Genérico",
+    detail: "Declaración aspiracional o slogan. No identifica instrumento, autoridad responsable, fuente de financiamiento ni forma de verificación."
+  },
+  {
+    score: 2,
+    label: "Básico",
+    detail: "Reconoce un problema público y formula una intención, pero el mecanismo es incompleto, ambiguo o depende de supuestos no explicados."
+  },
+  {
+    score: 3,
+    label: "Reconocible",
+    detail: "Presenta una propuesta identificable y algún instrumento —ley, programa, presupuesto, entidad o alianza—, pero carece de costeo, cronograma, indicadores o ruta normativa suficiente."
+  },
+  {
+    score: 4,
+    label: "Sólido",
+    detail: "La propuesta tiene diagnóstico, instrumento, entidad o actor responsable, compatibilidad institucional preliminar y riesgos parcialmente mitigados."
+  },
+  {
+    score: 5,
+    label: "Completo",
+    detail: "Incluye diagnóstico, instrumento, autoridad responsable, fuente de financiamiento, secuencia normativa, cronograma, indicadores verificables y salvaguardas jurídicas o institucionales."
+  }
+];
+
+const methodologyCriteria = [
+  {
+    name: "Claridad",
+    question: "¿La ciudadanía puede entender qué se propone y qué problema se busca resolver?",
+    high: "Propuesta directa, comprensible y vinculada a un problema concreto.",
+    low: "Mensaje retórico, abstracto o centrado en ataques sin medida identificable."
+  },
+  {
+    name: "Coherencia",
+    question: "¿El diagnóstico, la propuesta y la narrativa general se sostienen entre sí?",
+    high: "Existe continuidad entre problema, solución, instrumentos y discurso político.",
+    low: "Hay saltos entre diagnóstico y propuesta, contradicciones o promesas incompatibles."
+  },
+  {
+    name: "Viabilidad",
+    question: "¿La propuesta parece ejecutable dentro del marco institucional, presupuestal y temporal del gobierno?",
+    high: "Compatible con competencias estatales, capacidades públicas, plazos y restricciones fiscales.",
+    low: "Requiere reformas complejas, gasto no explicado o competencias que no dependen solo del Ejecutivo."
+  },
+  {
+    name: "Sustento técnico",
+    question: "¿Se apoya en datos, evidencia, instrumentos conocidos o diseño de política pública?",
+    high: "Usa cifras, programas, entidades, mecanismos y problemas verificables.",
+    low: "Formula afirmaciones sin evidencia, sin diseño o con causalidades débiles."
+  },
+  {
+    name: "Innovación",
+    question: "¿Introduce soluciones nuevas, mejoras institucionales o enfoques de modernización?",
+    high: "Propone rediseños, herramientas o estrategias que agregan valor público.",
+    low: "Repite programas previos sin adaptación o solo promete continuidad."
+  },
+  {
+    name: "Calidad tecnológica",
+    question: "¿La propuesta tecnológica considera datos, interoperabilidad, ciberseguridad y derechos?",
+    high: "Incluye arquitectura digital, gobernanza de datos, seguridad, privacidad y métricas.",
+    low: "Menciona apps, internet o tecnología como accesorio sin diseño ni salvaguardas."
+  },
+  {
+    name: "Capacidad de implementación",
+    question: "¿La propuesta tiene ruta operativa, responsables, priorización e indicadores?",
+    high: "Define quién ejecuta, cómo, cuándo, con qué recursos y cómo se medirá.",
+    low: "No identifica entidad, presupuesto, cronograma ni mecanismo de seguimiento."
+  }
+];
+
+const methodologySteps = [
+  "Separé la transcripción por bloques del debate y por intervención de cada candidatura.",
+  "Identifiqué propuestas explícitas, problemas públicos, instrumentos mencionados y omisiones relevantes.",
+  "Clasifiqué cada afirmación como hecho observado, inferencia u opinión analítica para evitar atribuir propuestas no dichas.",
+  "Evalué concreción y viabilidad de cada propuesta con una escala cualitativa: alta, media o baja.",
+  "Asigné puntajes 1 a 5 en siete criterios comparables, usando la misma regla para ambas candidaturas.",
+  "Revisé el componente tecnológico de forma separada: IA, gobierno digital, datos personales, ciberseguridad, conectividad, interoperabilidad, economía digital y regulación.",
+  "Analicé el lenguaje agrupando términos equivalentes y excluyendo palabras vacías, fórmulas de cortesía y ruido de transmisión."
+];
+
+const evidenceRules = [
+  {
+    label: "Hecho observado",
+    text: "Está expresamente dicho en la transcripción: una propuesta, acusación, cifra o instrumento mencionado por la candidatura."
+  },
+  {
+    label: "Inferencia",
+    text: "Es una consecuencia razonable de lo dicho, pero no se presenta como cita ni como promesa expresa."
+  },
+  {
+    label: "Opinión analítica",
+    text: "Es una valoración técnica sobre claridad, viabilidad, riesgos, vacíos, consistencia o implementación."
+  },
+  {
+    label: "Límite metodológico",
+    text: "Si una medida no aparece en la transcripción, no se incorpora como propuesta aunque sea conocida por plan de gobierno, prensa o contexto externo."
+  }
 ];
 
 const tabs = [
@@ -544,47 +638,102 @@ export default function DebatePresidencialInteractivo() {
 
           {view === "metodologia" && (
             <motion.section key="metodologia" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} className="py-10">
-              <div className="mb-8">
-                <div className="mb-3 flex items-center gap-2 text-sm font-black uppercase tracking-[0.25em]" style={{ color: BLUE }}>
-                  <BookOpen className="h-4 w-4" /> Cómo se puntuó
+              <div className="mb-8 grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+                <div>
+                  <div className="mb-3 flex items-center gap-2 text-sm font-black uppercase tracking-[0.25em]" style={{ color: BLUE }}>
+                    <BookOpen className="h-4 w-4" /> Cómo se puntuó
+                  </div>
+                  <h2 className="text-4xl font-black uppercase tracking-tight md:text-5xl">Metodología de análisis</h2>
                 </div>
-                <h2 className="text-4xl font-black uppercase tracking-tight md:text-5xl">Metodología de análisis</h2>
-                <p className="mt-3 max-w-4xl text-slate-600">
-                  La evaluación distingue hechos observados, inferencias y opinión analítica. La escala 1 a 5 no expresa preferencia electoral: mide claridad, coherencia, viabilidad, sustento técnico, innovación, calidad tecnológica y capacidad de implementación.
+                <p className="text-sm leading-6 text-slate-600">
+                  La plataforma usa exclusivamente la transcripción del debate como fuente principal. No incorpora propuestas externas, promesas de campaña no mencionadas ni información de prensa. La puntuación no mide simpatía política: mide calidad técnica observable en el debate.
                 </p>
               </div>
 
-              <div className="grid gap-4 md:grid-cols-5">
-                {scoring.map((item) => (
-                  <Card key={item.score} className="overflow-hidden">
-                    <div className="p-5 text-white" style={{ backgroundColor: item.score === 5 ? BLUE : DEEP_BLUE }}>
-                      <div className="text-5xl font-black">{item.score}</div>
-                      <div className="mt-1 text-sm font-black uppercase tracking-widest" style={{ color: YELLOW }}>{item.label}</div>
-                    </div>
-                    <div className="p-5 text-sm leading-6 text-slate-600">{item.detail}</div>
-                  </Card>
-                ))}
-              </div>
+              <section className="space-y-5">
+                <div className="mb-3 flex items-center gap-2 text-sm font-black uppercase tracking-[0.25em]" style={{ color: BLUE }}>
+                  <Gavel className="h-4 w-4" /> Ruta de trabajo
+                </div>
+                <div className="grid gap-3 md:grid-cols-2">
+                  {methodologySteps.map((step, index) => (
+                    <Card key={step}>
+                      <div className="flex gap-4 p-5">
+                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl text-sm font-black text-slate-950" style={{ backgroundColor: YELLOW }}>
+                          {index + 1}
+                        </div>
+                        <p className="text-sm font-semibold leading-6 text-slate-700">{step}</p>
+                      </div>
+                    </Card>
+                  ))}
+                </div>
+              </section>
 
-              <div className="mt-8 grid gap-6 lg:grid-cols-3">
-                <Card>
-                  <div className="p-6">
-                    <h3 className="text-xl font-black uppercase" style={{ color: BLUE }}>Hecho observado</h3>
-                    <p className="mt-3 text-sm leading-6 text-slate-600">Declaración o propuesta expresamente formulada en la transcripción del debate.</p>
+              <section className="mt-10 space-y-5">
+                <h3 className="text-2xl font-black uppercase" style={{ color: BLUE }}>Regla de evidencia</h3>
+                <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+                  {evidenceRules.map((rule) => (
+                    <Card key={rule.label}>
+                      <div className="p-5">
+                        <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-2xl" style={{ backgroundColor: BLUE }}>
+                          <CheckCircle2 className="h-5 w-5 text-white" />
+                        </div>
+                        <h4 className="text-lg font-black uppercase">{rule.label}</h4>
+                        <p className="mt-3 text-sm leading-6 text-slate-600">{rule.text}</p>
+                      </div>
+                    </Card>
+                  ))}
+                </div>
+              </section>
+
+              <section className="mt-10 space-y-5">
+                <h3 className="text-2xl font-black uppercase" style={{ color: BLUE }}>Escala 1 a 5</h3>
+                <div className="grid gap-4 md:grid-cols-5">
+                  {scoring.map((item) => (
+                    <Card key={item.score} className="overflow-hidden">
+                      <div className="p-5 text-white" style={{ backgroundColor: item.score === 5 ? BLUE : DEEP_BLUE }}>
+                        <div className="text-5xl font-black">{item.score}</div>
+                        <div className="mt-1 text-sm font-black uppercase tracking-widest" style={{ color: YELLOW }}>{item.label}</div>
+                      </div>
+                      <div className="p-5 text-sm leading-6 text-slate-600">{item.detail}</div>
+                    </Card>
+                  ))}
+                </div>
+              </section>
+
+              <section className="mt-10 space-y-5">
+                <h3 className="text-2xl font-black uppercase" style={{ color: BLUE }}>Criterios evaluados</h3>
+                <div className="grid gap-5 lg:grid-cols-2">
+                  {methodologyCriteria.map((criterion) => (
+                    <Card key={criterion.name}>
+                      <div className="p-6">
+                        <h4 className="text-xl font-black uppercase" style={{ color: BLUE }}>{criterion.name}</h4>
+                        <p className="mt-3 text-sm font-semibold leading-6 text-slate-700">{criterion.question}</p>
+                        <div className="mt-5 grid gap-3 sm:grid-cols-2">
+                          <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4">
+                            <div className="text-xs font-black uppercase tracking-widest text-emerald-700">Alto</div>
+                            <p className="mt-2 text-sm leading-6 text-emerald-900">{criterion.high}</p>
+                          </div>
+                          <div className="rounded-2xl border border-red-200 bg-red-50 p-4">
+                            <div className="text-xs font-black uppercase tracking-widest text-red-700">Bajo</div>
+                            <p className="mt-2 text-sm leading-6 text-red-900">{criterion.low}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </Card>
+                  ))}
+                </div>
+              </section>
+
+              <div className="mt-10 rounded-[2rem] p-6 text-white shadow-sm" style={{ backgroundColor: BLUE }}>
+                <div className="grid gap-5 lg:grid-cols-[0.35fr_1fr] lg:items-center">
+                  <div>
+                    <div className="mb-3 h-2 w-20 rounded-full" style={{ backgroundColor: YELLOW }} />
+                    <h3 className="text-2xl font-black uppercase">Nota final</h3>
                   </div>
-                </Card>
-                <Card>
-                  <div className="p-6">
-                    <h3 className="text-xl font-black uppercase" style={{ color: BLUE }}>Inferencia</h3>
-                    <p className="mt-3 text-sm leading-6 text-slate-600">Consecuencia razonable derivada de lo dicho, sin atribuir una propuesta que no fue expresada.</p>
-                  </div>
-                </Card>
-                <Card>
-                  <div className="p-6">
-                    <h3 className="text-xl font-black uppercase" style={{ color: BLUE }}>Opinión analítica</h3>
-                    <p className="mt-3 text-sm leading-6 text-slate-600">Valoración técnica sobre viabilidad, riesgos, vacíos, coherencia o implementación.</p>
-                  </div>
-                </Card>
+                  <p className="text-sm font-semibold leading-7 text-white/85">
+                    La calificación final es un promedio simple de siete criterios. Una candidatura puede puntuar mejor por concreción discursiva aunque otra tenga un diagnóstico más amplio. La escala premia propuestas que permiten ser auditadas: responsable, instrumento, presupuesto, plazo, indicadores y salvaguardas jurídicas.
+                  </p>
+                </div>
               </div>
             </motion.section>
           )}
