@@ -230,6 +230,15 @@ const evaluation = [
   { criterio: "Implementación", FP: 3.2, JPP: 2.8 }
 ];
 
+const evaluationSummary = {
+  fp: 3.1,
+  jpp: 2.8,
+  winner: "Fuerza Popular",
+  margin: 0.3,
+  note:
+    "El resultado no equivale a una recomendación electoral: resume calidad técnica observable en la transcripción, especialmente claridad, concreción, viabilidad, sustento e implementación."
+};
+
 const wordData = [
   { term: "Estado", count: 62 },
   { term: "Derechos", count: 59 },
@@ -360,6 +369,7 @@ const evidenceRules = [
 
 const tabs = [
   { id: "comparativo", label: "Comparativo" },
+  { id: "evaluacion", label: "Evaluación" },
   { id: "tecnologia", label: "Tecnología" },
   { id: "palabras", label: "Lenguaje" },
   { id: "preguntas", label: "Preguntas" },
@@ -764,20 +774,28 @@ export default function DebatePresidencialInteractivo() {
 
                 <div className="space-y-4">
                   <div className="rounded-[2rem] p-6 text-white shadow-sm" style={{ backgroundColor: BLUE }}>
-                    <div className="text-sm font-black uppercase tracking-[0.25em] text-white/70">Resultado técnico agregado</div>
+                    <div className="text-xs font-black uppercase tracking-[0.18em] text-white/70">Resultado técnico agregado</div>
+                    <div className="mt-4 rounded-3xl p-5 text-slate-950" style={{ backgroundColor: YELLOW }}>
+                      <div className="text-xs font-black uppercase tracking-[0.18em]">Ganador por puntaje</div>
+                      <div className="mt-2 text-2xl font-black uppercase">{evaluationSummary.winner}</div>
+                      <p className="mt-2 text-sm font-bold leading-6">
+                        Ventaja de {evaluationSummary.margin.toFixed(1)} puntos en el promedio general.
+                      </p>
+                    </div>
                     <div className="mt-5 grid grid-cols-2 gap-4">
                       <div className="rounded-3xl bg-white p-5" style={{ color: BLUE }}>
-                        <div className="text-4xl font-black md:text-5xl">3.1</div>
+                        <div className="text-4xl font-black md:text-5xl">{evaluationSummary.fp.toFixed(1)}</div>
                         <div className="font-bold uppercase">FP</div>
                       </div>
                       <div className="rounded-3xl p-5 text-slate-950" style={{ backgroundColor: YELLOW }}>
-                        <div className="text-4xl font-black md:text-5xl">2.8</div>
+                        <div className="text-4xl font-black md:text-5xl">{evaluationSummary.jpp.toFixed(1)}</div>
                         <div className="font-bold uppercase">JPP</div>
                       </div>
                     </div>
                     <p className="mt-5 text-sm leading-6 text-white/80">
                       FP obtiene mayor concreción discursiva en esta transcripción. JPP muestra mayor densidad político-institucional y social, pero varias propuestas requieren puente más claro entre aspiración, norma, presupuesto e implementación.
                     </p>
+                    <p className="mt-3 text-xs font-semibold leading-5 text-white/65">{evaluationSummary.note}</p>
                   </div>
 
                   {evaluation.map((row) => (
