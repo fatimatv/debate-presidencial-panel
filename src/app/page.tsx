@@ -528,7 +528,7 @@ export default function DebatePresidencialInteractivo() {
       <main className="mx-auto max-w-7xl px-6 py-10 lg:px-10">
         <div className="sticky top-0 z-20 -mx-6 border-b bg-white/95 px-6 py-4 backdrop-blur lg:-mx-10 lg:px-10">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-            <div className="grid grid-cols-2 gap-2 rounded-2xl bg-slate-100 p-1 sm:grid-cols-3 lg:grid-cols-5">
+            <div className="grid grid-cols-2 gap-2 rounded-2xl bg-slate-100 p-1 sm:grid-cols-3 xl:grid-cols-6">
               {tabs.map((tab) => (
                 <button
                   key={tab.id}
