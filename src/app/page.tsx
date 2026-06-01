@@ -210,14 +210,14 @@ const blocks = [
 ];
 
 const techItems = [
-  { name: "IA", clarity: 0, risk: "No fue mencionada como política pública, herramienta estatal ni objeto regulatorio.", impact: "Omisión crítica para un debate presidencial 2026.", icon: Cpu },
-  { name: "Pagos y extorsión", clarity: 3, risk: "Rastreo y bloqueo de pagos exige base legal, debido proceso, UIF, fiscalía y protección de datos.", impact: "Alto para inteligencia financiera contra extorsión.", icon: Database },
-  { name: "Telemedicina", clarity: 4, risk: "Requiere historia clínica, consentimiento, ciberseguridad, interoperabilidad y conectividad rural.", impact: "Alto para acceso a salud en zonas alejadas.", icon: Stethoscope },
-  { name: "Internet escolar", clarity: 3, risk: "Sin formación docente, dispositivos, seguridad infantil y mantenimiento, la conectividad no transforma aprendizajes.", impact: "Alto para cerrar brechas educativas.", icon: RadioTower },
-  { name: "DNI sanitario", clarity: 2, risk: "Usar DNI para intercambio prestacional implica datos sensibles, autenticación, interoperabilidad y reglas de acceso.", impact: "Alto si habilita continuidad de atención.", icon: Network },
-  { name: "Apps de inversión", clarity: 1, risk: "Una app no destraba inversiones si no rediseña procedimientos, permisos, trazabilidad y responsabilidad administrativa.", impact: "Medio si se convierte en plataforma de gestión pública.", icon: Activity },
-  { name: "Digitalización MYPE", clarity: 3, risk: "Falta comercio electrónico, pagos seguros, facturación digital, ciberseguridad y protección al consumidor.", impact: "Medio-alto para formalización y productividad.", icon: BriefcaseBusiness },
-  { name: "Ciberseguridad", clarity: 0, risk: "No fue mencionada pese a salud digital, pagos, educación conectada y apps estatales.", impact: "Riesgo sistémico para servicios públicos digitales.", icon: ShieldAlert }
+  { name: "IA", candidate: "Omisión de ambas candidaturas", clarity: 0, risk: "No fue mencionada como política pública, herramienta estatal ni objeto regulatorio.", impact: "Omisión crítica para un debate presidencial 2026.", icon: Cpu },
+  { name: "Pagos y extorsión", candidate: "Keiko Fujimori / Fuerza Popular", clarity: 3, risk: "Rastreo y bloqueo de pagos exige base legal, debido proceso, UIF, fiscalía y protección de datos.", impact: "Alto para inteligencia financiera contra extorsión.", icon: Database },
+  { name: "Telemedicina", candidate: "Keiko Fujimori / Fuerza Popular", clarity: 4, risk: "Requiere historia clínica, consentimiento, ciberseguridad, interoperabilidad y conectividad rural.", impact: "Alto para acceso a salud en zonas alejadas.", icon: Stethoscope },
+  { name: "Internet escolar", candidate: "Keiko Fujimori / Fuerza Popular", clarity: 3, risk: "Sin formación docente, dispositivos, seguridad infantil y mantenimiento, la conectividad no transforma aprendizajes.", impact: "Alto para cerrar brechas educativas.", icon: RadioTower },
+  { name: "DNI sanitario", candidate: "Roberto Sánchez / Juntos por el Perú", clarity: 2, risk: "Usar DNI para intercambio prestacional implica datos sensibles, autenticación, interoperabilidad y reglas de acceso.", impact: "Alto si habilita continuidad de atención.", icon: Network },
+  { name: "Apps de inversión", candidate: "Keiko Fujimori / Fuerza Popular", clarity: 1, risk: "Una app no destraba inversiones si no rediseña procedimientos, permisos, trazabilidad y responsabilidad administrativa.", impact: "Medio si se convierte en plataforma de gestión pública.", icon: Activity },
+  { name: "Digitalización MYPE", candidate: "Keiko Fujimori / Fuerza Popular", clarity: 3, risk: "Falta comercio electrónico, pagos seguros, facturación digital, ciberseguridad y protección al consumidor.", impact: "Medio-alto para formalización y productividad.", icon: BriefcaseBusiness },
+  { name: "Ciberseguridad", candidate: "Omisión de ambas candidaturas", clarity: 0, risk: "No fue mencionada pese a salud digital, pagos, educación conectada y apps estatales.", impact: "Riesgo sistémico para servicios públicos digitales.", icon: ShieldAlert }
 ];
 
 const evaluation = [
@@ -616,6 +616,9 @@ export default function DebatePresidencialInteractivo() {
                           </div>
                         </div>
                         <h3 className="text-lg font-black uppercase">{item.name}</h3>
+                        <div className="mt-3 inline-flex rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-black uppercase tracking-wide text-slate-700">
+                          {item.candidate}
+                        </div>
                         <p className="mt-3 text-sm leading-6 text-slate-600"><strong>Riesgo:</strong> {item.risk}</p>
                         <p className="mt-2 text-sm leading-6 text-slate-600"><strong>Impacto:</strong> {item.impact}</p>
                       </div>
